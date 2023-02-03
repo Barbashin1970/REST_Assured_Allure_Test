@@ -12,7 +12,7 @@ public class Steps {
 
         // ----------------- ручка -------- POST --------- COURIER --------------
     @Step("Регистрация нового курьера с валидными данными")
-    public Response registrationValidData(String login, String pass, String name) {
+    public static Response registrationValidData(String login, String pass, String name) {
         CourierLogin courierLogin = new CourierLogin(login, pass, name);
         return given()
                 .header("Content-type", "application/json")
@@ -24,7 +24,7 @@ public class Steps {
 
 
     @Step("Проверка тела - (ok: true) и статуса ответа сервера при первой валидной регистрации - 201")
-    public void checkAnswerThenValidRegistration(Response responseCourier) {
+    public static void checkAnswerThenValidRegistration(Response responseCourier) {
         responseCourier.then()
                 .body("ok", equalTo(true))
                 .and()
@@ -33,7 +33,7 @@ public class Steps {
     }
 
     @Step("Проверка тела и статуса ответа сервера при повторной регистрации - 409")
-    public void checkAnswerThenAgainRegistration(Response responseCourier) {
+    public static void checkAnswerThenAgainRegistration(Response responseCourier) {
         responseCourier.then()
                 .body("code", equalTo(409))
                 .and()
@@ -44,7 +44,7 @@ public class Steps {
     }
 
     @Step("Проверка тела и статуса ответа сервера при неполных данных - 400")
-    public void checkAnswerThenRegistrationDataNotEnough(Response responseCourier) {
+    public static void checkAnswerThenRegistrationDataNotEnough(Response responseCourier) {
         responseCourier.then()
                 .body("code", equalTo(400))
                 .and()
@@ -55,7 +55,7 @@ public class Steps {
     }
     // ------------------ ручка ------POST ---- LOGIN ---------------
     @Step("Запрос номера id курьера по его логину и паролю")
-    public int getValidCourier_id(String login, String pass) {
+    public static int getValidCourier_id(String login, String pass) {
         CourierId courierId = new CourierId(login, pass);
         Response responseCourierLogin =
                 given()
@@ -68,7 +68,7 @@ public class Steps {
         return jsnPath.get("id");
     }
     @Step("Проверка наличия номера id курьера по его логину и паролю")
-    public void checkLoginAndPassReturnId(String login, String pass) {
+    public static void checkLoginAndPassReturnId(String login, String pass) {
         CourierId courierId = new CourierId(login, pass);
           Response responseLogin =  given()
                         .header("Content-type", "application/json")
@@ -80,7 +80,7 @@ public class Steps {
     }
 
     @Step("Запрос номера id курьера по его логину и паролю")
-    public void checkNoLoginOrPassReturn_400(String login, String pass) {
+    public static void checkNoLoginOrPassReturn_400(String login, String pass) {
         CourierId courierId = new CourierId(login, pass);
         Response responseLogin =  given()
                 .header("Content-type", "application/json")
@@ -97,7 +97,7 @@ public class Steps {
     }
 
    @Step("Cистема вернёт ошибку, если неправильно указать логин или пароль")
-   public void checkWrongLoginOrPassReturn_404(String login, String pass) {
+   public static void checkWrongLoginOrPassReturn_404(String login, String pass) {
        CourierId courierId = new CourierId(login, pass);
        Response responseLogin =  given()
                .header("Content-type", "application/json")
@@ -117,7 +117,7 @@ public class Steps {
 
     // ------------------- ручка -------- DELETE ------------
     @Step("Удаление курьера по его номеру - статус 200 и ответ ok: true.")
-    public void deleteCourier(int courierId) {
+    public static void deleteCourier(int courierId) {
         Response responseDelete = given()
                 .header("Content-type", "application/json")
                 .when()

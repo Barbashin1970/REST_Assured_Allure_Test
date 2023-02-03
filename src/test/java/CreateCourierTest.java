@@ -7,12 +7,12 @@ import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.praktikum.Steps;
 
 import static ru.yandex.praktikum.LoginDataConst.*;
+import static ru.yandex.praktikum.Steps.*;
 
 
-public class CreateCourierTest extends Steps {
+public class CreateCourierTest {
 
 
     // int statusCode;

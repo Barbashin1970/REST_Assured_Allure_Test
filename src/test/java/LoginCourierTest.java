@@ -6,12 +6,12 @@ import io.restassured.RestAssured;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.praktikum.Steps;
 
 import static ru.yandex.praktikum.LoginDataConst.*;
+import static ru.yandex.praktikum.Steps.*;
 
 
-public class LoginCourierTest extends Steps {
+public class LoginCourierTest {
 
     int courierId;
     @Before
