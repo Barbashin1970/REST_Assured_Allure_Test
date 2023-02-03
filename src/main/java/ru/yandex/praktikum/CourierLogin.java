@@ -38,5 +38,4 @@ public class CourierLogin {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

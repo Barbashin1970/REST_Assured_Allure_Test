@@ -11,7 +11,6 @@ import org.junit.Test;
 import static ru.yandex.praktikum.LoginDataConst.*;
 import static ru.yandex.praktikum.Steps.*;
 
-
 public class CreateCourierTest {
 
 
