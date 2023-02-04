@@ -3,7 +3,6 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
-
 import org.junit.Test;
 
 import static ru.yandex.praktikum.LoginDataConst.*;

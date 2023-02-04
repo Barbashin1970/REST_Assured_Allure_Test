@@ -12,15 +12,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class ListOfOrdersTest extends SetUpLogin {
 
-    @Test
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("В тело ответа возвращается список заказов")
-    @Description("Список всех заказов системы как файл json")
-    public void createCourierAndOrderAndGetList() {
-        orderListInfoNotNull();
-    }
-
-
     @Step("Получение списка заказов без отправки параметров.")
     public static void orderListInfoNotNull() {
         Response responseOrderInfo = given()
@@ -31,5 +22,13 @@ public class ListOfOrdersTest extends SetUpLogin {
                 .body("orders", notNullValue())
                 .and()
                 .statusCode(200);
+    }
+
+    @Test
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("В тело ответа возвращается список заказов")
+    @Description("Список всех заказов системы как файл json")
+    public void createCourierAndOrderAndGetList() {
+        orderListInfoNotNull();
     }
 }

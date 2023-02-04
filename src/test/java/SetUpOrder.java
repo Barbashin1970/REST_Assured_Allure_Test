@@ -1,7 +1,5 @@
 import io.restassured.RestAssured;
-
 import org.junit.Before;
-
 
 
 public class SetUpOrder {

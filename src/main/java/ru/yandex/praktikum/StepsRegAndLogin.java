@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class StepsRegAndLogin {
 
-        // ----------------- ручка -------- POST --------- COURIER --------------
+    // ----------------- ручка -------- POST --------- COURIER --------------
     @Step("Регистрация нового курьера с валидными данными")
     public static Response registrationValidData(String login, String pass, String name) {
         CourierLoginPassName courierLogin = new CourierLoginPassName(login, pass, name);
@@ -50,6 +50,7 @@ public class StepsRegAndLogin {
                 .and()
                 .statusCode(400);
     }
+
     // ------------------ ручка ------POST ---- LOGIN ---------------
     @Step("Запрос номера id курьера по его логину и паролю")
     public static int getValidCourier_id(String login, String pass) {
@@ -64,22 +65,23 @@ public class StepsRegAndLogin {
         JsonPath jsnPath = responseCourierLogin.jsonPath();
         return jsnPath.get("id");
     }
+
     @Step("Проверка наличия номера id курьера по его логину и паролю")
     public static void checkLoginAndPassReturnId(String login, String pass) {
         CourierLoginPass courierId = new CourierLoginPass(login, pass);
-          Response responseLogin =  given()
-                        .header("Content-type", "application/json")
-                        .and()
-                        .body(courierId)
-                        .when()
-                        .post("/api/v1/courier/login");
-          responseLogin.then().body("id", notNullValue());
+        Response responseLogin = given()
+                .header("Content-type", "application/json")
+                .and()
+                .body(courierId)
+                .when()
+                .post("/api/v1/courier/login");
+        responseLogin.then().body("id", notNullValue());
     }
 
     @Step("Запрос номера id курьера по его логину и паролю")
     public static void checkNoLoginOrPassReturn_400(String login, String pass) {
         CourierLoginPass courierId = new CourierLoginPass(login, pass);
-        Response responseLogin =  given()
+        Response responseLogin = given()
                 .header("Content-type", "application/json")
                 .and()
                 .body(courierId)
@@ -93,22 +95,22 @@ public class StepsRegAndLogin {
                 .statusCode(400);
     }
 
-   @Step("Cистема вернёт ошибку, если неправильно указать логин или пароль")
-   public static void checkWrongLoginOrPassReturn_404(String login, String pass) {
-       CourierLoginPass courierId = new CourierLoginPass(login, pass);
-       Response responseLogin =  given()
-               .header("Content-type", "application/json")
-               .and()
-               .body(courierId)
-               .when()
-               .post("/api/v1/courier/login");
-       responseLogin.then()
-               .body("code", equalTo(404))
-               .and()
-               .body("message", equalTo("Учетная запись не найдена"))
-               .and()
-               .statusCode(404);
-   }
+    @Step("Cистема вернёт ошибку, если неправильно указать логин или пароль")
+    public static void checkWrongLoginOrPassReturn_404(String login, String pass) {
+        CourierLoginPass courierId = new CourierLoginPass(login, pass);
+        Response responseLogin = given()
+                .header("Content-type", "application/json")
+                .and()
+                .body(courierId)
+                .when()
+                .post("/api/v1/courier/login");
+        responseLogin.then()
+                .body("code", equalTo(404))
+                .and()
+                .body("message", equalTo("Учетная запись не найдена"))
+                .and()
+                .statusCode(404);
+    }
 
     // ------------------- ручка -------- DELETE ------------
     @Step("Удаление курьера по его номеру - статус 200 и ответ ok: true.")

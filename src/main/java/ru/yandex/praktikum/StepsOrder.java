@@ -21,6 +21,7 @@ public class StepsOrder {
                 .post("/api/v1/orders");
         return responseOrder.jsonPath().get("track");
     }
+
     @Step("Тело ответа содержит не пустой track.")
     public static void orderTrackNotNull(File json) {
         Response responseOrder = given()
@@ -43,6 +44,7 @@ public class StepsOrder {
                 .and()
                 .statusCode(200);
     }
+
     // шаг отмены заказа  пока закомментирован в тестах - не работает ручка put
     @Step("Отмена заказа по номеру track.")
     public static void orderCancel(int track) {

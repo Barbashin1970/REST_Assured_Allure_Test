@@ -3,17 +3,17 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-
-import static ru.yandex.praktikum.ColourConst.*;
-import static ru.yandex.praktikum.StepsOrder.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.File;
 
+import static ru.yandex.praktikum.ColourConst.*;
+import static ru.yandex.praktikum.StepsOrder.*;
+
 @RunWith(Parameterized.class)
 public class OrderParameterizedTest extends SetUpOrder {
-    private File colour;
+    private final File colour;
 
     public OrderParameterizedTest(File colour) {
         this.colour = colour;
@@ -46,6 +46,6 @@ public class OrderParameterizedTest extends SetUpOrder {
     @Description("Проверяем цвета - черный - серый - черный/серый - без указания цвета")
     public void checkOrderCreationAnyColours() {
         orderInfo(getOrderTrack(colour));
-       // orderCancel(getOrderTrack(colour));
+        // orderCancel(getOrderTrack(colour));
     }
 }
