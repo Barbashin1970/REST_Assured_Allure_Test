@@ -2,28 +2,14 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Before;
+
 import org.junit.Test;
 
 import static ru.yandex.praktikum.LoginDataConst.*;
-import static ru.yandex.praktikum.Steps.*;
+import static ru.yandex.praktikum.StepsRegAndLogin.*;
 
-public class CreateCourierTest {
-
-
-    // int statusCode;
-    int courierId;
-
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
-        RANDOM_LOGIN = RandomStringUtils.randomAlphabetic(8);
-        RANDOM_PASS = RandomStringUtils.randomNumeric(4);
-        RANDOM_NAME = RandomStringUtils.randomAlphabetic(8);
-    }
+public class CreateCourierTest extends SetUpLogin {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
@@ -32,8 +18,7 @@ public class CreateCourierTest {
     public void createCourierNoNameReturn_201() {
         Response responseCourier = registrationValidData(RANDOM_LOGIN, RANDOM_PASS, "");
         checkAnswerThenValidRegistration(responseCourier);
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
@@ -43,8 +28,7 @@ public class CreateCourierTest {
     public void createCourierReturn_201() {
         Response responseCourier = registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkAnswerThenValidRegistration(responseCourier);
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
@@ -55,8 +39,7 @@ public class CreateCourierTest {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         Response responseCourierAgain = registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkAnswerThenAgainRegistration(responseCourierAgain);
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
     }
 
 
@@ -77,7 +60,5 @@ public class CreateCourierTest {
         Response responseCourier = registrationValidData(RANDOM_LOGIN, "", RANDOM_NAME);
         checkAnswerThenRegistrationDataNotEnough(responseCourier);
     }
-
-
 
 }

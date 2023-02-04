@@ -1,26 +1,13 @@
 package ru.yandex.praktikum;
 
-public class CourierLogin {
+public class CourierLoginPass {
 
     private String login;
     private String password;
-    private String firstName;
 
-    public CourierLogin(String login, String password, String firstName) {
+    public CourierLoginPass(String login, String password) {
         this.login = login;
         this.password = password;
-        this.firstName = firstName;
-    }
-
-    public CourierLogin() {
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLogin() {

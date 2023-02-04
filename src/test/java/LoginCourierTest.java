@@ -2,24 +2,12 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Before;
 import org.junit.Test;
 
 import static ru.yandex.praktikum.LoginDataConst.*;
-import static ru.yandex.praktikum.Steps.*;
+import static ru.yandex.praktikum.StepsRegAndLogin.*;
 
-public class LoginCourierTest {
-
-    int courierId;
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
-        RANDOM_LOGIN = RandomStringUtils.randomAlphabetic(8);
-        RANDOM_PASS = RandomStringUtils.randomNumeric(4);
-        RANDOM_NAME = RandomStringUtils.randomAlphabetic(8);
-    }
+public class LoginCourierTest extends SetUpLogin {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
@@ -28,8 +16,8 @@ public class LoginCourierTest {
     public void loginAndPassCourierReturnId() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkLoginAndPassReturnId(RANDOM_LOGIN, RANDOM_PASS);
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
+
     }
 
     @Test
@@ -39,8 +27,7 @@ public class LoginCourierTest {
     public void loginAndNoPassCourierReturn_400() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkNoLoginOrPassReturn_400(RANDOM_LOGIN, "");
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
@@ -50,8 +37,7 @@ public class LoginCourierTest {
     public void passAndNoLoginCourierReturn_400() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkNoLoginOrPassReturn_400("", RANDOM_PASS);
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
@@ -61,8 +47,7 @@ public class LoginCourierTest {
     public void wrongPassCourierReturn_404() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkWrongLoginOrPassReturn_404(RANDOM_LOGIN, "1111");
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
@@ -72,8 +57,6 @@ public class LoginCourierTest {
     public void wrongLoginCourierReturn_404() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkWrongLoginOrPassReturn_404("WrongLogin", RANDOM_PASS);
-        courierId = getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(courierId);
+        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
     }
-
 }
