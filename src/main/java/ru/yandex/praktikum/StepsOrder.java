@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import java.io.File;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class StepsOrder {
@@ -38,27 +37,29 @@ public class StepsOrder {
         Response responseOrderInfo = given()
                 .header("Content-type", "application/json")
                 .when()
-                .get(String.format("/api/v1/orders/track?t=%s", orderTrack));
+                .queryParam("t", orderTrack)
+                .get("/api/v1/orders/track");
         responseOrderInfo.then()
                 .body("order", notNullValue())
                 .and()
                 .statusCode(200);
     }
 
+    //@Step("Отмена заказа по номеру track.")
     // шаг отмены заказа  пока закомментирован в тестах - не работает ручка put
-    @Step("Отмена заказа по номеру track.")
-    public static void orderCancel(int track) {
-        File json = new File(String.format("{\"track\": %s}", track));
-        Response responseOrder = given()
-                .header("Content-type", "application/json")
-                .and()
-                .body(json)
-                .when()
-                .put("/api/v1/orders/cancel"); // не работает корректно
-        responseOrder.then()
-                .body("ok", equalTo(true)) // на валидный трек присылает 400
-                .and()
-                .statusCode(200);
-    }
+    //
+    // public static void orderCancel(int track) {
+    //    OrderTrack orderTrack = new OrderTrack(track);
+    //     Response responseOrder = given()
+    //             .header("Content-type", "application/json")
+    //           .and()
+    //           .body(orderTrack)
+    //            .when()
+    //            .put("/api/v1/orders/cancel"); // не работает корректно
+    //    responseOrder.then()
+    //            .body("ok", equalTo(true)) // на валидный трек присылает 400
+    //            .and()
+    //            .statusCode(200);
+    // }
 
 }

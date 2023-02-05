@@ -2,6 +2,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -12,10 +15,10 @@ import static ru.yandex.praktikum.ColourConst.*;
 import static ru.yandex.praktikum.StepsOrder.*;
 
 @RunWith(Parameterized.class)
-public class OrderParameterizedTest extends SetUpOrder {
+public class OrderFileJsonParamTest {
     private final File colour;
 
-    public OrderParameterizedTest(File colour) {
+    public OrderFileJsonParamTest(File colour) {
         this.colour = colour;
     }
 
@@ -29,15 +32,18 @@ public class OrderParameterizedTest extends SetUpOrder {
         };
     }
 
+    @Before
+    public void setUp() {
+        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
+
+    }
+
     @Test
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Тело ответа содержит track не пустой")
     @Description("Проверяем цвета - черный - серый - черный/серый - без указания цвета")
     public void checkOrderTrackNotNull() {
         orderTrackNotNull(colour);
-        //orderCancel(getOrderTrack(colour));
-        // пока невозможно отменить заказ - баг в API - не работает ручка Отменить заказ
-        // put/api/v1/orders/cancel
     }
 
     @Test
@@ -46,6 +52,14 @@ public class OrderParameterizedTest extends SetUpOrder {
     @Description("Проверяем цвета - черный - серый - черный/серый - без указания цвета")
     public void checkOrderCreationAnyColours() {
         orderInfo(getOrderTrack(colour));
+    }
+
+    @After
+    public void tearDown() {
+        // пока невозможно отменить заказ
+        // баг в API - не работает ручка Отменить заказ
+        // put/api/v1/orders/cancel
         // orderCancel(getOrderTrack(colour));
     }
+
 }

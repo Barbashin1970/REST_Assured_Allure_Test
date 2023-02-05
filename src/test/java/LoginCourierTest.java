@@ -16,7 +16,7 @@ public class LoginCourierTest extends SetUpLogin {
     public void loginAndPassCourierReturnId() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
         checkLoginAndPassReturnId(RANDOM_LOGIN, RANDOM_PASS);
-        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
+        deleteCourier(getValidCourierId(RANDOM_LOGIN, RANDOM_PASS));
 
     }
 
@@ -24,39 +24,39 @@ public class LoginCourierTest extends SetUpLogin {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Курьер не может авторизоваться без пароля")
     @Description("При вводе валидного логина без пароля - ошибка 400.")
-    public void loginAndNoPassCourierReturn_400() {
+    public void loginAndNoPassCourierReturnError() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
-        checkNoLoginOrPassReturn_400(RANDOM_LOGIN, "");
-        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
+        checkNoLoginOrPassReturnError(RANDOM_LOGIN, "");
+        deleteCourier(getValidCourierId(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Курьер не может авторизоваться с пустым полем логин")
     @Description("При вводе валидного пароля с пустым полем логин - ошибка 400.")
-    public void passAndNoLoginCourierReturn_400() {
+    public void passAndNoLoginCourierReturnError() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
-        checkNoLoginOrPassReturn_400("", RANDOM_PASS);
-        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
+        checkNoLoginOrPassReturnError("", RANDOM_PASS);
+        deleteCourier(getValidCourierId(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Курьер не может авторизоваться с неправильным паролем")
     @Description("При вводе неправильного пароля - ошибка 404.")
-    public void wrongPassCourierReturn_404() {
+    public void wrongPassCourierReturnError() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
-        checkWrongLoginOrPassReturn_404(RANDOM_LOGIN, "1111");
-        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
+        checkWrongLoginOrPassReturnError(RANDOM_LOGIN, "1111");
+        deleteCourier(getValidCourierId(RANDOM_LOGIN, RANDOM_PASS));
     }
 
     @Test
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Курьер не может авторизоваться с неправильным логином")
     @Description("Если авторизоваться под несуществующим пользователем - ошибка 404.")
-    public void wrongLoginCourierReturn_404() {
+    public void wrongLoginCourierReturnError() {
         registrationValidData(RANDOM_LOGIN, RANDOM_PASS, RANDOM_NAME);
-        checkWrongLoginOrPassReturn_404("WrongLogin", RANDOM_PASS);
-        deleteCourier(getValidCourier_id(RANDOM_LOGIN, RANDOM_PASS));
+        checkWrongLoginOrPassReturnError("WrongLogin", RANDOM_PASS);
+        deleteCourier(getValidCourierId(RANDOM_LOGIN, RANDOM_PASS));
     }
 }

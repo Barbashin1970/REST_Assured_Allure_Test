@@ -53,7 +53,7 @@ public class StepsRegAndLogin {
 
     // ------------------ ручка ------POST ---- LOGIN ---------------
     @Step("Запрос номера id курьера по его логину и паролю")
-    public static int getValidCourier_id(String login, String pass) {
+    public static int getValidCourierId(String login, String pass) {
         CourierLoginPass courierId = new CourierLoginPass(login, pass);
         Response responseCourierLogin =
                 given()
@@ -79,7 +79,7 @@ public class StepsRegAndLogin {
     }
 
     @Step("Запрос номера id курьера по его логину и паролю")
-    public static void checkNoLoginOrPassReturn_400(String login, String pass) {
+    public static void checkNoLoginOrPassReturnError(String login, String pass) {
         CourierLoginPass courierId = new CourierLoginPass(login, pass);
         Response responseLogin = given()
                 .header("Content-type", "application/json")
@@ -96,7 +96,7 @@ public class StepsRegAndLogin {
     }
 
     @Step("Cистема вернёт ошибку, если неправильно указать логин или пароль")
-    public static void checkWrongLoginOrPassReturn_404(String login, String pass) {
+    public static void checkWrongLoginOrPassReturnError(String login, String pass) {
         CourierLoginPass courierId = new CourierLoginPass(login, pass);
         Response responseLogin = given()
                 .header("Content-type", "application/json")
