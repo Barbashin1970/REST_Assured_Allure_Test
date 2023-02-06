@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.yandex.praktikum</groupId>
-    <artifactId>Sptint_7</artifactId>
+    <artifactId>REST_Assured_Allure_Test</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
