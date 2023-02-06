@@ -1,0 +1,5 @@
+/.idea/
+/target/
+/.allure/
+/allure-results/
+/.allure/allure-2.15.0/
