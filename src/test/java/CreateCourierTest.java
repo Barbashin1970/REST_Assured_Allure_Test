@@ -20,6 +20,7 @@ public class CreateCourierTest extends SetUpLogin {
         deleteCourier(getValidCourierId(RANDOM_LOGIN, RANDOM_PASS));
     }
 
+
     @Test
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание курьера")
